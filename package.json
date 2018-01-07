@@ -1,0 +1,27 @@
+{
+  "name": "nicebot-telegram",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/SpaceK33z/nicebot-telegram",
+  "author": "Kees Kluskens",
+  "license": "ISC",
+  "devDependencies": {
+    "@volst/eslint-config": "^2.1.0",
+    "eslint": "^4.15.0",
+    "nodemon": "^1.14.8"
+  },
+  "dependencies": {
+    "dotenv": "^4.0.0",
+    "micro": "^9.0.2",
+    "node-telegram-bot-api": "^0.30.0",
+    "uuid": "^3.1.0"
+  },
+  "scripts": {
+    "start": "nodemon",
+    "now-start": "micro",
+    "deploy": "now remove -y nicebot-telegram && NODE_ENV=production now --public --dotenv && now alias"
+  },
+  "now": {
+    "alias": "nicebot-telegram.now.sh"
+  }
+}
