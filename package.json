@@ -19,7 +19,7 @@
   "scripts": {
     "start": "nodemon",
     "now-start": "micro",
-    "deploy": "now remove -y nicebot-telegram && NODE_ENV=production now --public --dotenv && now alias"
+    "deploy": "now remove -y nicebot-telegram && NODE_ENV=production now --public --dotenv && now alias && now scale nicebot-telegram.now.sh 1"
   },
   "now": {
     "alias": "nicebot-telegram.now.sh"
