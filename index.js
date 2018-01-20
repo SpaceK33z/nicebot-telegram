@@ -27,7 +27,7 @@ function mapResult(text) {
     id: uuid(),
     type: 'article',
     thumb_url:
-      'https://raw.githubusercontent.com/rutger/emoj-telegram/master/icon.png',
+      'https://github.com/SpaceK33z/nicebot-telegram/blob/master/icon.jpg',
     title: 'Roll',
     input_message_content: {
       message_text: text,
@@ -62,5 +62,5 @@ bot.on('message', message => {
 });
 
 module.exports = () => ({
-  message: 'You have reached the nice-telegram API. There is no REST API yet.'
+  message: 'You have reached the nice-telegram API. There is no REST API yet.',
 });
