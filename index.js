@@ -26,8 +26,6 @@ function mapResult(text) {
   return {
     id: uuid(),
     type: 'article',
-    thumb_url:
-      'https://github.com/SpaceK33z/nicebot-telegram/blob/master/icon.jpg',
     title: 'Roll',
     input_message_content: {
       message_text: text,
