@@ -4,8 +4,8 @@ const responses = require('./responses.json');
 
 require('dotenv').config();
 
-function rollResponse() {
-  return responses[Math.floor(Math.random() * responses.length)];
+function rollResponse(words) {
+  return words[Math.floor(Math.random() * words.length)];
 }
 
 function rollEnding() {
@@ -13,8 +13,8 @@ function rollEnding() {
   return endings[Math.floor(Math.random() * endings.length)];
 }
 
-function generateMessage() {
-  return `${rollResponse()}${rollEnding()}`;
+function generateMessage(words) {
+  return `${rollResponse(words)}${rollEnding()}`;
 }
 
 const token = process.env.NICEBOT_TOKEN;
@@ -22,11 +22,11 @@ const bot = new TelegramBot(token, {
   polling: true,
 });
 
-function mapResult(text) {
+function mapResult(title, text) {
   return {
     id: uuid(),
     type: 'article',
-    title: 'Roll',
+    title,
     input_message_content: {
       message_text: text,
     },
@@ -34,13 +34,15 @@ function mapResult(text) {
 }
 
 bot.on('inline_query', query => {
-  const randomResult = mapResult(generateMessage());
+  const results = [];
+  Object.entries(responses).forEach(([responseType, responseWords]) => {
+    const result = mapResult(responseType, generateMessage(responseWords));
+    results.push(result);
+  });
 
-  bot
-    .answerInlineQuery(query.id, [randomResult], { cache_time: 0 })
-    .catch(err => {
-      console.log(`Something failed (sender: ${query.from.username})`, err);
-    });
+  bot.answerInlineQuery(query.id, results, { cache_time: 0 }).catch(err => {
+    console.log(`Something failed (sender: ${query.from.username})`, err);
+  });
 });
 
 bot.on('message', message => {
