@@ -13,8 +13,16 @@ function rollEnding() {
   return endings[Math.floor(Math.random() * endings.length)];
 }
 
+// appends the last character of the word max 3 times so you can fake having emotions
+function uniquefy(word) {
+  const lastChar = word.slice(-1);
+  // there are thousand ways to do this better but I don't care this was meant to be bad code
+  const variations = ['', '', '', '', lastChar, lastChar.repeat(2)];
+  return `${word}${variations[Math.floor(Math.random() * variations.length)]}`;
+}
+
 function generateMessage(words) {
-  return `${rollResponse(words)}${rollEnding()}`;
+  return `${uniquefy(rollResponse(words))}${rollEnding()}`;
 }
 
 const token = process.env.NICEBOT_TOKEN;
